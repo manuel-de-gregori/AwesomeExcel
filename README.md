@@ -1,26 +1,31 @@
 # AwesomeExcel
 
 ```csharp
-fileGenerator.Generate(people, (customizer) =>
+fileGenerator.Generate(actors, (customizer) =>
 {
     customizer.Workbook.SetFileType(FileType.Xlsx);
 
     customizer.Sheet
-        .SetName("Test nome foglio")
+        .SetName("Sheet name for README example")
         .SetFillForegroundColor(Color.LightBlue)
-        .SetHeaderFillForegroundColor(Color.Blue)
-        .SetHeaderBorderBottomColor(Color.Red)
         .SetVerticalAlignment(VerticalAlignment.Center);
 
     customizer.GetColumn(p => p.Name)
         .SetName("Actor's name")
-        .SetStyle(s => s.FillForegroundColor = Color.Aqua);
+        .SetFillForegroundColor(Color.Aqua);
 
     customizer.GetColumn(p => p.Surname)
         .SetName("Actor's surname")
         .SetHorizontalAlignment(HorizontalAlignment.Right);
 
     customizer.GetColumn(p => p.BirthDate)
-        .SetStyle(s => s.DateTimeFormat = "dd/mm/yyyy");
+        .SetDateTimeFormat("dd/mm/yyyy");
 });
+
+class Actor
+{
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public DateTime? BirthDate { get; set; }
+}
 ```
