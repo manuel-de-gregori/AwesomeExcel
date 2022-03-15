@@ -3,7 +3,7 @@ using AwesomeExcel.Customization.Models;
 
 namespace AwesomeExcel.FluentCustomization;
 
-public static class ColumnInfoExtension
+public static class ColumnCustomizationExtension
 {
     public static ColumnCustomization SetName(this ColumnCustomization columnInfo, string name)
     {

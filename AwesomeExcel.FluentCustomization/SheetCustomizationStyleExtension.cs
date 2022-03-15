@@ -3,43 +3,8 @@ using AwesomeExcel.Customization.Models;
 
 namespace AwesomeExcel.FluentCustomization;
 
-public static class SheetInfoExtension
+public static class SheetCustomizationStyleExtension
 {
-    public static SheetCustomization SetName(this SheetCustomization sheetInfo, string name)
-    {
-        if (sheetInfo is null)
-        {
-            throw new ArgumentNullException(nameof(sheetInfo));
-        }
-
-        sheetInfo.Name = name;
-        return sheetInfo;
-    }
-
-    public static SheetCustomization SetIsProtected(this SheetCustomization sheetInfo, bool IsProtected)
-    {
-        if (sheetInfo is null)
-        {
-            throw new ArgumentNullException(nameof(sheetInfo));
-        }
-
-        sheetInfo.IsProtected = IsProtected;
-        return sheetInfo;
-    }
-
-    public static SheetCustomization HasHeader(this SheetCustomization sheetInfo, bool hasHeader)
-    {
-        if (sheetInfo is null)
-        {
-            throw new ArgumentNullException(nameof(sheetInfo));
-        }
-
-        sheetInfo.HasHeader = hasHeader;
-        return sheetInfo;
-    }
-
-
-
     public static SheetCustomization SetHorizontalAlignment(this SheetCustomization sheetInfo, HorizontalAlignment horizontalAlignment)
     {
         if (sheetInfo is null)

@@ -6,7 +6,7 @@ using System;
 namespace AwesomeExcel.FluentCustomization.UnitTests;
 
 [TestClass]
-public class SheetCustomizationHeaderTest
+public class SheetCustomizationHeaderStyleTest
 {
     [TestMethod]
     public void SetBorderBottomColor_ShouldSet_BorderBottomColor()
