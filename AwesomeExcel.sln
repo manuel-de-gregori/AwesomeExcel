@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.BridgeNpoi", "AwesomeExcel.BridgeNpoi\AwesomeExcel.BridgeNpoi.csproj", "{58638859-7B54-4CA0-A56A-0825CEBE27C1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC} = {E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.Common", "AwesomeExcel.Common\AwesomeExcel.Common.csproj", "{E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.FluentCustomization", "AwesomeExcel.FluentCustomization\AwesomeExcel.FluentCustomization.csproj", "{9D5EAEBB-85F3-4596-8402-B3786579C852}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.Generator", "AwesomeExcel.Generator\AwesomeExcel.Generator.csproj", "{6DC4B159-9CB0-49DE-95BF-413531F48FFB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.Customization", "AwesomeExcel.Customization\AwesomeExcel.Customization.csproj", "{A99CEF7F-68A9-4943-9281-07D1679887D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8D8F7AA9-9CD3-4AF7-979F-4D22833F6BDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.BridgeNpoi.UnitTests", "Tests\AwesomeExcel.BridgeNpoi.UnitTests\AwesomeExcel.BridgeNpoi.UnitTests.csproj", "{A1FBDAFF-6268-4A29-9E21-CCEE0D19F8FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.Common.UnitTests", "Tests\AwesomeExcel.Common.UnitTests\AwesomeExcel.Common.UnitTests.csproj", "{4565C060-957B-46B1-85CB-3021B04372B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.Generator.UnitTests", "Tests\AwesomeExcel.Generator.UnitTests\AwesomeExcel.Generator.UnitTests.csproj", "{D6D7F4EE-933F-42D3-BD99-158A59E9DB4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeExcel.IntegrationTests", "Tests\AwesomeExcel.IntegrationTests\AwesomeExcel.IntegrationTests.csproj", "{04E29226-14FC-4FF6-BB89-DB07734833A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeExcel.FluentCustomization.UnitTests", "AwesomeExcel.FluentCustomization.UnitTests\AwesomeExcel.FluentCustomization.UnitTests.csproj", "{5469124E-627C-4E57-9199-9E3AC6B0EEF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58638859-7B54-4CA0-A56A-0825CEBE27C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58638859-7B54-4CA0-A56A-0825CEBE27C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58638859-7B54-4CA0-A56A-0825CEBE27C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58638859-7B54-4CA0-A56A-0825CEBE27C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6BC6A3C-3F64-4B8C-9DDB-11AEF5D5D5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D5EAEBB-85F3-4596-8402-B3786579C852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D5EAEBB-85F3-4596-8402-B3786579C852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D5EAEBB-85F3-4596-8402-B3786579C852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D5EAEBB-85F3-4596-8402-B3786579C852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DC4B159-9CB0-49DE-95BF-413531F48FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DC4B159-9CB0-49DE-95BF-413531F48FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DC4B159-9CB0-49DE-95BF-413531F48FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DC4B159-9CB0-49DE-95BF-413531F48FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99CEF7F-68A9-4943-9281-07D1679887D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99CEF7F-68A9-4943-9281-07D1679887D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99CEF7F-68A9-4943-9281-07D1679887D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99CEF7F-68A9-4943-9281-07D1679887D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1FBDAFF-6268-4A29-9E21-CCEE0D19F8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1FBDAFF-6268-4A29-9E21-CCEE0D19F8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1FBDAFF-6268-4A29-9E21-CCEE0D19F8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1FBDAFF-6268-4A29-9E21-CCEE0D19F8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4565C060-957B-46B1-85CB-3021B04372B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4565C060-957B-46B1-85CB-3021B04372B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4565C060-957B-46B1-85CB-3021B04372B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4565C060-957B-46B1-85CB-3021B04372B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D7F4EE-933F-42D3-BD99-158A59E9DB4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D7F4EE-933F-42D3-BD99-158A59E9DB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D7F4EE-933F-42D3-BD99-158A59E9DB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D7F4EE-933F-42D3-BD99-158A59E9DB4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E29226-14FC-4FF6-BB89-DB07734833A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E29226-14FC-4FF6-BB89-DB07734833A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E29226-14FC-4FF6-BB89-DB07734833A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E29226-14FC-4FF6-BB89-DB07734833A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5469124E-627C-4E57-9199-9E3AC6B0EEF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5469124E-627C-4E57-9199-9E3AC6B0EEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5469124E-627C-4E57-9199-9E3AC6B0EEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5469124E-627C-4E57-9199-9E3AC6B0EEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1FBDAFF-6268-4A29-9E21-CCEE0D19F8FF} = {8D8F7AA9-9CD3-4AF7-979F-4D22833F6BDD}
+		{4565C060-957B-46B1-85CB-3021B04372B8} = {8D8F7AA9-9CD3-4AF7-979F-4D22833F6BDD}
+		{D6D7F4EE-933F-42D3-BD99-158A59E9DB4A} = {8D8F7AA9-9CD3-4AF7-979F-4D22833F6BDD}
+		{04E29226-14FC-4FF6-BB89-DB07734833A9} = {8D8F7AA9-9CD3-4AF7-979F-4D22833F6BDD}
+		{5469124E-627C-4E57-9199-9E3AC6B0EEF4} = {8D8F7AA9-9CD3-4AF7-979F-4D22833F6BDD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57B85E55-9ECF-4224-A146-BE8BA9DEFE31}
+	EndGlobalSection
+EndGlobal
