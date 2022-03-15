@@ -29,7 +29,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void Create_CustomColumnsName_ShouldReturn_GivenCustomNames()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, new ColumnCustomizationService().GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null,GetCustomizedColumn());
 
         Assert.AreEqual(sheet.Columns.Count, 4);
         Assert.AreEqual(sheet.Columns[0].Name, "Actor's name");
@@ -42,7 +42,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_NullChecks()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, new ColumnCustomizationService().GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
 
         Assert.IsNotNull(sheet);
         Assert.IsNotNull(sheet.Columns);
@@ -67,7 +67,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column0_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, new ColumnCustomizationService().GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
 
         Column column0 = sheet.Columns[0];
         Assert.AreEqual(column0.Style.HorizontalAlignment, HorizontalAlignment.Right);
@@ -77,7 +77,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column1_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, new ColumnCustomizationService().GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
 
         Column column1 = sheet.Columns[1];
         Assert.AreEqual(column1.Style.FillForegroundColor, Color.Blue);
@@ -87,7 +87,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column2_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, new ColumnCustomizationService().GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
 
         Column column2 = sheet.Columns[2];
         Assert.IsTrue(column2.Style.FontStyle.IsBold);
@@ -98,7 +98,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column3_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, new ColumnCustomizationService().GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
 
         Column column3 = sheet.Columns[3];
         Assert.AreEqual(actual: column3.Style.BorderBottomColor, expected: Color.Green);
@@ -125,89 +125,86 @@ public class SheetFactory_ColumnCustomizationServiceTest
         public int Age => (DateTime.Now.Date - BirthDate.Date).Days / 365;
     }
 
-    private class ColumnCustomizationService : IColumnCustomizationService
+    public Dictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumn()
     {
-        public Dictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumn()
+        return new Dictionary<PropertyInfo, ColumnCustomization>
         {
-            return new Dictionary<PropertyInfo, ColumnCustomization>
-            {
-                { typeof(Person).GetProperty(nameof(Person.Name)), GetColumnName() },
-                { typeof(Person).GetProperty(nameof(Person.Surname)), GetColumnSurname() },
-                { typeof(Person).GetProperty(nameof(Person.BirthDate)), GetColumnBirthDate() },
-                { typeof(Person).GetProperty(nameof(Person.Age)), GetColumnAge() },
-            };
-        }
+            { typeof(Person).GetProperty(nameof(Person.Name)), GetColumnName() },
+            { typeof(Person).GetProperty(nameof(Person.Surname)), GetColumnSurname() },
+            { typeof(Person).GetProperty(nameof(Person.BirthDate)), GetColumnBirthDate() },
+            { typeof(Person).GetProperty(nameof(Person.Age)), GetColumnAge() },
+        };
+    }
 
-        public ColumnCustomization GetColumn(PropertyInfo pi)
+    public ColumnCustomization GetColumn(PropertyInfo pi)
+    {
+        return pi.Name switch
         {
-            return pi.Name switch
-            {
-                nameof(Person.Name) => GetColumnName(),
-                nameof(Person.Surname) => GetColumnSurname(),
-                nameof(Person.BirthDate) => GetColumnBirthDate(),
-                nameof(Person.Age) => GetColumnAge(),
-                _ => throw new KeyNotFoundException()
-            };
-        }
+            nameof(Person.Name) => GetColumnName(),
+            nameof(Person.Surname) => GetColumnSurname(),
+            nameof(Person.BirthDate) => GetColumnBirthDate(),
+            nameof(Person.Age) => GetColumnAge(),
+            _ => throw new KeyNotFoundException()
+        };
+    }
 
-        private ColumnCustomization GetColumnAge()
+    private ColumnCustomization GetColumnAge()
+    {
+        ColumnCustomization customizedColumn = new ColumnCustomization();
+
+        customizedColumn
+            .SetName("Actor's age")
+            .SetBorderLeftColor(Color.IceBlue)
+            .SetBorderRightColor(Color.Lime)
+            .SetBorderTopColor(Color.Red)
+            .SetBorderBottomColor(Color.Green)
+            .SetFontHeightInPoints(12)
+            .SetFontColor(Color.Yellow)
+            .SetHorizontalAlignment(HorizontalAlignment.Right)
+            .SetVerticalAlignment(VerticalAlignment.Bottom)
+            .SetFillForegroundColor(Color.Ivory)
+            .SetFontName("AwesomeExcel");
+
+
+        return customizedColumn;
+    }
+
+    private ColumnCustomization GetColumnBirthDate()
+    {
+        ColumnCustomization customizedColumn = new();
+
+        customizedColumn.SetName("Actor's date of birth");
+        customizedColumn.SetStyle(s =>
         {
-            ColumnCustomization customizedColumn = new ColumnCustomization();
+            s.FontStyle.IsBold = true;
+            s.FontStyle.Color = Color.Red;
+        });
 
-            customizedColumn
-                .SetName("Actor's age")
-                .SetBorderLeftColor(Color.IceBlue)
-                .SetBorderRightColor(Color.Lime)
-                .SetBorderTopColor(Color.Red)
-                .SetBorderBottomColor(Color.Green)
-                .SetFontHeightInPoints(12)
-                .SetFontColor(Color.Yellow)
-                .SetHorizontalAlignment(HorizontalAlignment.Right)
-                .SetVerticalAlignment(VerticalAlignment.Bottom)
-                .SetFillForegroundColor(Color.Ivory)
-                .SetFontName("AwesomeExcel");
+        return customizedColumn;
+    }
 
+    private ColumnCustomization GetColumnSurname()
+    {
+        ColumnCustomization customizedColumn = new();
 
-            return customizedColumn;
-        }
-
-        private ColumnCustomization GetColumnBirthDate()
+        customizedColumn.Name = "Actor's surname";
+        customizedColumn.Style = new()
         {
-            ColumnCustomization customizedColumn = new();
-
-            customizedColumn.SetName("Actor's date of birth");
-            customizedColumn.SetStyle(s =>
-            {
-                s.FontStyle.IsBold = true;
-                s.FontStyle.Color = Color.Red;
-            });
-
-            return customizedColumn;
-        }
-
-        private ColumnCustomization GetColumnSurname()
-        {
-            ColumnCustomization customizedColumn = new();
-
-            customizedColumn.Name = "Actor's surname";
-            customizedColumn.Style = new()
-            {
-                FillForegroundColor = Color.Blue
-            };
+            FillForegroundColor = Color.Blue
+        };
 
 
-            return customizedColumn;
-        }
+        return customizedColumn;
+    }
 
-        private ColumnCustomization GetColumnName()
-        {
-            ColumnCustomization _customizedColumn = new();
+    private ColumnCustomization GetColumnName()
+    {
+        ColumnCustomization _customizedColumn = new();
 
-            _customizedColumn
-                .SetName("Actor's name")
-                .SetStyle(s => s.HorizontalAlignment = HorizontalAlignment.Right);
+        _customizedColumn
+            .SetName("Actor's name")
+            .SetStyle(s => s.HorizontalAlignment = HorizontalAlignment.Right);
 
-            return _customizedColumn;
-        }
+        return _customizedColumn;
     }
 }
