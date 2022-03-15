@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace AwesomeExcel.Customization.Services;
 
-public class ColumnCustomizationService 
+public class ColumnsCustomizer 
 {
     private readonly Dictionary<PropertyInfo, ColumnCustomization> customizedColumns = new();
 

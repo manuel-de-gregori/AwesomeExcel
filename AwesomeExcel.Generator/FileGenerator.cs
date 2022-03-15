@@ -20,9 +20,9 @@ public abstract class FileGenerator<TWorkbook>
     /// <param name="rows">The rows of the sheet.</param>
     /// <param name="action">A delegate used to customize the Excel file.</param>
     /// <returns>The MemoryStream of the Excel file.</returns>
-    public MemoryStream Generate<TSheet>(IEnumerable<TSheet> rows, Action<SingleSheetCustomizationService<TSheet>> action)
+    public MemoryStream Generate<TSheet>(IEnumerable<TSheet> rows, Action<SingleSheetCustomizer<TSheet>> action)
     {
-        SingleSheetCustomizationService<TSheet> sps = new();
+        SingleSheetCustomizer<TSheet> sps = new();
         action(sps);
 
         Sheet sheet = sheetFactory.Create(rows, sps.Sheet, sps.ccs.GetCustomizedColumn());

@@ -5,17 +5,17 @@ using System.Reflection;
 
 namespace AwesomeExcel.Customization.Services;
 
-public abstract class MultipleSheetsCustomizationService
+public abstract class MultipleSheetsCustomizer
 {
     public WorkbookCustomization Workbook { get; } = new();
 
-    internal Dictionary<SheetCustomization, ColumnCustomizationService> dict = new();
+    internal Dictionary<SheetCustomization, ColumnsCustomizer> dict = new();
 
     public ColumnCustomization GetOrCreateColumn<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
     {
         if (!dict.ContainsKey(sheet))
         {
-            ColumnCustomizationService ccs = new();
+            ColumnsCustomizer ccs = new();
             dict.Add(sheet, ccs);
         }
 
@@ -32,29 +32,29 @@ public abstract class MultipleSheetsCustomizationService
         return null;
     }
 
-    public ColumnCustomizationService GetColumnCustomizationService<T>(SheetCustomization<T> sheet)
+    public ColumnsCustomizer GetColumnCustomizationService<T>(SheetCustomization<T> sheet)
     {
-        ColumnCustomizationService ccs = dict[sheet];
+        ColumnsCustomizer ccs = dict[sheet];
         return ccs;
     }
 }
 
-public class MultipleSheetsCustomizationService<TSheet1, TSheet2> : MultipleSheetsCustomizationService
+public class MultipleSheetsCustomizationService<TSheet1, TSheet2> : MultipleSheetsCustomizer
 {
     public (SheetCustomization<TSheet1> Sheet1, SheetCustomization<TSheet2> Sheet2) Sheets { get; } = new(new(), new());
 }
 
-public class MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3> : MultipleSheetsCustomizationService
+public class MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3> : MultipleSheetsCustomizer
 {
     public (SheetCustomization<TSheet1>, SheetCustomization<TSheet2>, SheetCustomization<TSheet3>) Sheets { get; } = new(new(), new(), new());
 }
 
-public class MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3, TSheet4> : MultipleSheetsCustomizationService
+public class MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3, TSheet4> : MultipleSheetsCustomizer
 {
     public (SheetCustomization<TSheet1>, SheetCustomization<TSheet2>, SheetCustomization<TSheet3>, SheetCustomization<TSheet4>) Sheets { get; } = new(new(), new(), new(), new());
 }
 
-public class MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : MultipleSheetsCustomizationService
+public class MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : MultipleSheetsCustomizer
 {
     public (SheetCustomization<TSheet1>, SheetCustomization<TSheet2>, SheetCustomization<TSheet3>, SheetCustomization<TSheet4>, SheetCustomization<TSheet5>) Sheets { get; } = new(new(), new(), new(), new(), new());
 }

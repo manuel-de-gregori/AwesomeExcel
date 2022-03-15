@@ -18,7 +18,7 @@ public class Class2
 
         var fileGenerator = new BridgeNpoi.NpoiFileGenerator();
 
-        MemoryStream file = fileGenerator.Generate(people, (SingleSheetCustomizationService<Person> sps) =>
+        MemoryStream file = fileGenerator.Generate(people, (SingleSheetCustomizer<Person> sps) =>
         {
             sps.Workbook.SetFileType(FileType.Xlsx);
 
