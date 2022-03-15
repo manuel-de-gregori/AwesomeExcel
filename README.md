@@ -1,7 +1,7 @@
 # AwesomeExcel
 
 ```csharp
-fileGenerator.Generate(actors, (customizer) =>
+var stream = excelGenerator.Generate(actors, (customizer) =>
 {
     customizer.Workbook.SetFileType(FileType.Xlsx);
 
