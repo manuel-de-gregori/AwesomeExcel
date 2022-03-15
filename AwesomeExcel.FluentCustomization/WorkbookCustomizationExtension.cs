@@ -3,7 +3,7 @@ using AwesomeExcel.Customization.Models;
 
 namespace AwesomeExcel.FluentCustomization;
 
-public static class WorkbookInfoExtension
+public static class WorkbookCustomizationExtension
 {
     public static WorkbookCustomization SetFileType(this WorkbookCustomization workbook, FileType fileType)
     {

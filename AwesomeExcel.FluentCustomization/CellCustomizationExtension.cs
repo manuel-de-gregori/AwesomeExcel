@@ -3,7 +3,7 @@ using AwesomeExcel.Customization.Models;
 
 namespace AwesomeExcel.FluentCustomization;
 
-public static class CellInfoExtension
+public static class CellCustomizationExtension
 {
     public static CellCustomization<T> SetHorizontalAlignment<T>(this CellCustomization<T> cellInfo, Func<T, HorizontalAlignment?> horizontalAlignment)
     {
