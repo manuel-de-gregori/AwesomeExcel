@@ -27,7 +27,7 @@ public class ColumnsCustomizer
         }
     }
 
-    public Dictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumn()
+    public IReadOnlyDictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumn()
     {
         return customizedColumns;
     }

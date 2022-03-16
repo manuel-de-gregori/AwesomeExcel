@@ -23,7 +23,7 @@ internal class SheetFactory
     /// <returns>An Excel Sheet with the given rows and customizations.</returns>
     /// <exception cref="ArgumentNullException">rows is null</exception>
     /// <exception cref="InvalidOperationException">rows contains null elements</exception>
-    public Sheet Create<TSheet>(IEnumerable<TSheet> rows, SheetCustomization si, Dictionary<PropertyInfo, ColumnCustomization> ci)
+    public Sheet Create<TSheet>(IEnumerable<TSheet> rows, SheetCustomization si, IReadOnlyDictionary<PropertyInfo, ColumnCustomization> ci)
     {
         if (rows is null)
         {
@@ -85,7 +85,7 @@ internal class SheetFactory
         };
     }
 
-    private List<Column> GetColumns(IEnumerable<PropertyInfo> properties, Dictionary<PropertyInfo, ColumnCustomization> ci)
+    private List<Column> GetColumns(IEnumerable<PropertyInfo> properties, IReadOnlyDictionary<PropertyInfo, ColumnCustomization> ci)
     {
         List<Column> excelColumns = properties
             .Where(pi => ci is null || !ci.TryGetValue(pi, out ColumnCustomization value) || value.Excluded == false)
