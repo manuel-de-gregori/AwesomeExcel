@@ -40,9 +40,9 @@ public abstract class FileGenerator<TWorkbook>
     /// <param name="rowsSheet2">The rows of the second sheet.</param>
     /// <param name="action">A delegate used to customize the Excel file.</param>
     /// <returns>The MemoryStream of the Excel file.</returns>
-    public MemoryStream Generate<TSheet1, TSheet2>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, Action<MultipleSheetsCustomizationService<TSheet1, TSheet2>> action)
+    public MemoryStream Generate<TSheet1, TSheet2>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, Action<MultipleSheetsCustomizer<TSheet1, TSheet2>> action)
     {
-        MultipleSheetsCustomizationService<TSheet1, TSheet2> msps = new();
+        MultipleSheetsCustomizer<TSheet1, TSheet2> msps = new();
         action(msps);
 
         Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheets.Sheet1, msps.GetColumnCustomizationService(msps.Sheets.Sheet1).GetCustomizedColumn());
@@ -63,9 +63,9 @@ public abstract class FileGenerator<TWorkbook>
     /// <param name="rowsSheet3">The rows of the third sheet.</param>
     /// <param name="action">A delegate used to customize the Excel file.</param>
     /// <returns>The MemoryStream of the Excel file.</returns>
-    public MemoryStream Generate<TSheet1, TSheet2, TSheet3>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, IEnumerable<TSheet3> rowsSheet3, Action<MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3>> action)
+    public MemoryStream Generate<TSheet1, TSheet2, TSheet3>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, IEnumerable<TSheet3> rowsSheet3, Action<MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3>> action)
     {
-        MultipleSheetsCustomizationService<TSheet1, TSheet2, TSheet3> msps = new();
+        MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> msps = new();
         action(msps);
 
         Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheets.Item1, msps.GetColumnCustomizationService(msps.Sheets.Item1).GetCustomizedColumn());

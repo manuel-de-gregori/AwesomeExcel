@@ -53,8 +53,8 @@ public class Class2
 
         var fileGenerator = new BridgeNpoi.NpoiFileGenerator();
 
-        MemoryStream file = fileGenerator.Generate(people, invoices, (MultipleSheetsCustomizationService<Person, Invoice> sps) =>
-        {
+        MemoryStream file = fileGenerator.Generate(people, invoices, (MultipleSheetsCustomizer<Person, Invoice> sps) =>
+        { 
             sps.Workbook.SetFileType(FileType.Xlsx);
 
             sps.Sheets.Sheet1
@@ -66,18 +66,18 @@ public class Class2
 
             sps.Sheets.Sheet2.HasHeader(true);
 
-            sps.GetOrCreateColumn(sps.Sheets.Sheet1, p => p.Name)
+            sps.GetColumn(sps.Sheets.Sheet1, p => p.Name)
                 .SetName("Actor's name")
                 .SetStyle(s => s.FillForegroundColor = Color.Aqua);
 
-            sps.GetOrCreateColumn(sps.Sheets.Sheet1, p => p.Surname)
+            sps.GetColumn(sps.Sheets.Sheet1, p => p.Surname)
                 .SetName("Actor's surname")
                 .SetHorizontalAlignment(HorizontalAlignment.Right);
 
-            sps.GetOrCreateColumn(sps.Sheets.Sheet2, p => p.CreationDate)
+            sps.GetColumn(sps.Sheets.Sheet2, p => p.CreationDate)
                 .SetDateTimeFormat("dd/mm/yyyy");
 
-            sps.GetOrCreateColumn(sps.Sheets.Sheet2, p => p.Amount)
+            sps.GetColumn(sps.Sheets.Sheet2, p => p.Amount)
                 .SetFillForegroundColor(Color.Green);
         });
 
