@@ -57,27 +57,27 @@ public class Class2
         { 
             sps.Workbook.SetFileType(FileType.Xlsx);
 
-            sps.Sheets.Sheet1
+            sps.Sheet1
                 .SetName("Test sheet name")
                 .SetFillForegroundColor(Color.LightBlue)
                 .SetHeaderFillForegroundColor(Color.Blue)
                 .SetHeaderBorderBottomColor(Color.Red)
                 .SetVerticalAlignment(VerticalAlignment.Center);
 
-            sps.Sheets.Sheet2.HasHeader(true);
+            sps.Sheet2.HasHeader(true);
 
-            sps.GetColumn(sps.Sheets.Sheet1, p => p.Name)
+            sps.GetColumn(sps.Sheet1, p => p.Name)
                 .SetName("Actor's name")
                 .SetStyle(s => s.FillForegroundColor = Color.Aqua);
 
-            sps.GetColumn(sps.Sheets.Sheet1, p => p.Surname)
+            sps.GetColumn(sps.Sheet1, p => p.Surname)
                 .SetName("Actor's surname")
                 .SetHorizontalAlignment(HorizontalAlignment.Right);
 
-            sps.GetColumn(sps.Sheets.Sheet2, p => p.CreationDate)
+            sps.GetColumn(sps.Sheet2, p => p.CreationDate)
                 .SetDateTimeFormat("dd/mm/yyyy");
 
-            sps.GetColumn(sps.Sheets.Sheet2, p => p.Amount)
+            sps.GetColumn(sps.Sheet2, p => p.Amount)
                 .SetFillForegroundColor(Color.Green);
         });
 

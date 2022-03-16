@@ -16,7 +16,7 @@ public class SheetFactory_SheetInfoTest
     [TestMethod]
     public void CreateSheet_SheetInfo_ShouldHaveGivenValues()
     {
-        SheetCustomization si = new()
+        SheetCustomization<Person> si = new()
         {
             Name = nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues),
             HasHeader = true,
@@ -34,7 +34,7 @@ public class SheetFactory_SheetInfoTest
     [TestMethod]
     public void CreateSheet_SheetInfo_ShouldHaveGivenValues_2()
     {
-        SheetCustomization si = new()
+        SheetCustomization<Person> si = new()
         {
             Name = nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues_2),
             HasHeader = false,
@@ -53,7 +53,7 @@ public class SheetFactory_SheetInfoTest
     [TestMethod]
     public void CreateSheet_SheetInfo_StyleAndFontStyle_ShouldHaveGivenValues()
     {
-        SheetCustomization si = new()
+        SheetCustomization<Person> si = new()
         {
             Style = new()
             {

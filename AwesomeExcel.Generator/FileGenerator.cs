@@ -45,8 +45,8 @@ public abstract class FileGenerator<TWorkbook>
         MultipleSheetsCustomizer<TSheet1, TSheet2> msps = new();
         action(msps);
 
-        Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheets.Sheet1, msps.GetColumnCustomizationService(msps.Sheets.Sheet1).GetCustomizedColumn());
-        Sheet sheet2 = sheetFactory.Create(rowsSheet2, msps.Sheets.Sheet2, msps.GetColumnCustomizationService(msps.Sheets.Sheet2).GetCustomizedColumn());
+        Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheet1, msps.GetColumnCustomizationService(msps.Sheet1).GetCustomizedColumn());
+        Sheet sheet2 = sheetFactory.Create(rowsSheet2, msps.Sheet2, msps.GetColumnCustomizationService(msps.Sheet2).GetCustomizedColumn());
 
         Workbook excelWorkbook = workbookFactory.Create(new Sheet[] { sheet1, sheet2 }, msps.Workbook);
         return GetStream(excelWorkbook);
@@ -68,9 +68,9 @@ public abstract class FileGenerator<TWorkbook>
         MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> msps = new();
         action(msps);
 
-        Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheets.Item1, msps.GetColumnCustomizationService(msps.Sheets.Item1).GetCustomizedColumn());
-        Sheet sheet2 = sheetFactory.Create(rowsSheet2, msps.Sheets.Item2, msps.GetColumnCustomizationService(msps.Sheets.Item2).GetCustomizedColumn());
-        Sheet sheet3 = sheetFactory.Create(rowsSheet3, msps.Sheets.Item3, msps.GetColumnCustomizationService(msps.Sheets.Item3).GetCustomizedColumn());
+        Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheet1, msps.GetColumnCustomizationService(msps.Sheet1).GetCustomizedColumn());
+        Sheet sheet2 = sheetFactory.Create(rowsSheet2, msps.Sheet2, msps.GetColumnCustomizationService(msps.Sheet2).GetCustomizedColumn());
+        Sheet sheet3 = sheetFactory.Create(rowsSheet3, msps.Sheet3, msps.GetColumnCustomizationService(msps.Sheet3).GetCustomizedColumn());
 
         Workbook excelWorkbook = workbookFactory.Create(new List<Sheet> { sheet1, sheet2, sheet3 }, msps.Workbook);
         return GetStream(excelWorkbook);
