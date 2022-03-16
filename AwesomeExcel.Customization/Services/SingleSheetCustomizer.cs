@@ -4,10 +4,10 @@ using System.Reflection;
 
 namespace AwesomeExcel.Customization.Services;
 
-public class SingleSheetCustomizer<T>
+public class SingleSheetCustomizer<T> : ISingleSheetCustomizer<T>
 {
-    public readonly ColumnsCustomizer ccs = new();
-    internal readonly CellsCustomizer<T> cells = new();
+    private readonly ColumnsCustomizer ccs = new();
+    private readonly CellsCustomizer<T> cells = new();
 
     public WorkbookCustomization Workbook { get; } = new();
     public SheetCustomization<T> Sheet { get; } = new();
@@ -25,5 +25,11 @@ public class SingleSheetCustomizer<T>
         PropertyInfo pi = me.Member as PropertyInfo;
 
         return cells.GetOrCreateCells(pi);
+    }
+
+    public IReadOnlyDictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumns()
+    {
+        IReadOnlyDictionary<PropertyInfo, ColumnCustomization> x = ccs.GetCustomizedColumn();
+        return x;
     }
 }
