@@ -18,7 +18,7 @@ public class Class2
 
         var fileGenerator = new BridgeNpoi.NpoiFileGenerator();
 
-        MemoryStream file = fileGenerator.Generate(people, (SingleSheetCustomizer<Person> sps) =>
+        MemoryStream file = fileGenerator.Generate(people, (ISheetCustomizer<Person> sps) =>
         {
             sps.Workbook.SetFileType(FileType.Xlsx);
 
@@ -53,7 +53,7 @@ public class Class2
 
         var fileGenerator = new BridgeNpoi.NpoiFileGenerator();
 
-        MemoryStream file = fileGenerator.Generate(people, invoices, (MultipleSheetsCustomizer<Person, Invoice> sps) =>
+        MemoryStream file = fileGenerator.Generate(people, invoices, (ISheetsCustomizer<Person, Invoice> sps) =>
         { 
             sps.Workbook.SetFileType(FileType.Xlsx);
 

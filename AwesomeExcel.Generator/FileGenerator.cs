@@ -20,7 +20,7 @@ public abstract class FileGenerator<TWorkbook>
     /// <param name="rows">The rows of the sheet.</param>
     /// <param name="action">A delegate used to customize the Excel file.</param>
     /// <returns>The MemoryStream of the Excel file.</returns>
-    public MemoryStream Generate<TSheet>(IEnumerable<TSheet> rows, Action<ISingleSheetCustomizer<TSheet>> action)
+    public MemoryStream Generate<TSheet>(IEnumerable<TSheet> rows, Action<ISheetCustomizer<TSheet>> action)
     {
         SingleSheetCustomizer<TSheet> sps = new();
         action(sps);
@@ -40,7 +40,7 @@ public abstract class FileGenerator<TWorkbook>
     /// <param name="rowsSheet2">The rows of the second sheet.</param>
     /// <param name="action">A delegate used to customize the Excel file.</param>
     /// <returns>The MemoryStream of the Excel file.</returns>
-    public MemoryStream Generate<TSheet1, TSheet2>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, Action<IMultipleSheetsCustomizer<TSheet1, TSheet2>> action)
+    public MemoryStream Generate<TSheet1, TSheet2>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, Action<ISheetsCustomizer<TSheet1, TSheet2>> action)
     {
         MultipleSheetsCustomizer<TSheet1, TSheet2> msps = new();
         action(msps);
@@ -63,7 +63,7 @@ public abstract class FileGenerator<TWorkbook>
     /// <param name="rowsSheet3">The rows of the third sheet.</param>
     /// <param name="action">A delegate used to customize the Excel file.</param>
     /// <returns>The MemoryStream of the Excel file.</returns>
-    public MemoryStream Generate<TSheet1, TSheet2, TSheet3>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, IEnumerable<TSheet3> rowsSheet3, Action<IMultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3>> action)
+    public MemoryStream Generate<TSheet1, TSheet2, TSheet3>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, IEnumerable<TSheet3> rowsSheet3, Action<ISheetsCustomizer<TSheet1, TSheet2, TSheet3>> action)
     {
         MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> msps = new();
         action(msps);

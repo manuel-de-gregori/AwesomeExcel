@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace AwesomeExcel.Customization.Services;
 
-public class SingleSheetCustomizer<T> : ISingleSheetCustomizer<T>
+public class SingleSheetCustomizer<T> : ISheetCustomizer<T>
 {
     private readonly ColumnsCustomizer ccs = new();
     private readonly CellsCustomizer<T> cells = new();
