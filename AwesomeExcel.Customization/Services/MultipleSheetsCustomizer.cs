@@ -7,8 +7,6 @@ namespace AwesomeExcel.Customization.Services;
 
 public abstract class MultipleSheetsCustomizer
 {
-    public WorkbookCustomization Workbook { get; } = new();
-
     private Dictionary<SheetCustomization, ColumnsCustomizer> dict = new();
 
     public ColumnCustomization GetColumn<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
@@ -31,39 +29,43 @@ public abstract class MultipleSheetsCustomizer
         return null;
     }
 
-    public ColumnsCustomizer GetColumnCustomizationService<T>(SheetCustomization<T> sheet)
+    public IReadOnlyDictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumns<T>(SheetCustomization<T> sheet)
     {
-        ColumnsCustomizer ccs = dict[sheet];
+        IReadOnlyDictionary<PropertyInfo, ColumnCustomization> ccs = dict[sheet].GetCustomizedColumn();
         return ccs;
     }
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2> : MultipleSheetsCustomizer
+public class MultipleSheetsCustomizer<TSheet1, TSheet2> : MultipleSheetsCustomizer, IMultipleSheetsCustomizer<TSheet1, TSheet2>
 {
+    public WorkbookCustomization Workbook { get; } = new();
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> : MultipleSheetsCustomizer
+public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> : MultipleSheetsCustomizer, IMultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3>
 {
+    public WorkbookCustomization Workbook { get; } = new();
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
     public SheetCustomization<TSheet3> Sheet3 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : MultipleSheetsCustomizer
+public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : MultipleSheetsCustomizer, IMultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4>
 {
+    public WorkbookCustomization Workbook { get; } = new();
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
     public SheetCustomization<TSheet3> Sheet3 { get; } = new();
-    public SheetCustomization<TSheet3> Sheet4 { get; } = new();
+    public SheetCustomization<TSheet4> Sheet4 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : MultipleSheetsCustomizer
+public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : MultipleSheetsCustomizer, IMultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5>
 {
+    public WorkbookCustomization Workbook { get; } = new();
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
     public SheetCustomization<TSheet3> Sheet3 { get; } = new();
-    public SheetCustomization<TSheet3> Sheet4 { get; } = new();
-    public SheetCustomization<TSheet3> Sheet5 { get; } = new();
+    public SheetCustomization<TSheet4> Sheet4 { get; } = new();
+    public SheetCustomization<TSheet5> Sheet5 { get; } = new();
 }
