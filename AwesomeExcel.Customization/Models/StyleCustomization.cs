@@ -2,7 +2,9 @@
 
 namespace AwesomeExcel.Customization.Models;
 
-public class StyleCustomization<T>
+public class StyleCustomization { }
+
+public class StyleCustomization<T> : StyleCustomization
 {
     public Func<T, Color?> BorderTopColor { get; set; }
     public Func<T, Color?> BorderBottomColor { get; set; }
