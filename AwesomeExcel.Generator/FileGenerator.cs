@@ -25,7 +25,7 @@ public abstract class FileGenerator<TWorkbook>
         SheetCustomizer<TSheet> customizer = new();
         action(customizer);
 
-        Sheet sheet = sheetFactory.Create(rows, customizer.Sheet, customizer.GetCustomizedColumns());
+        Sheet sheet = sheetFactory.Create(rows, customizer.Sheet, customizer.GetCustomizedColumns(), customizer.GetCustomizedCells());
 
         Workbook excelWorkbook = workbookFactory.Create(new Sheet[1] { sheet }, customizer.Workbook);
         return GetStream(excelWorkbook);
@@ -45,8 +45,8 @@ public abstract class FileGenerator<TWorkbook>
         SheetsCustomizer<TSheet1, TSheet2> customizer = new();
         action(customizer);
 
-        Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1));
-        Sheet sheet2 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet2));
+        Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1), customizer.GetCustomizedCells(customizer.Sheet1));
+        Sheet sheet2 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet2), customizer.GetCustomizedCells(customizer.Sheet2));
 
         Workbook excelWorkbook = workbookFactory.Create(new Sheet[] { sheet1, sheet2 }, customizer.Workbook);
         return GetStream(excelWorkbook);
@@ -68,9 +68,9 @@ public abstract class FileGenerator<TWorkbook>
         MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> customizer = new();
         action(customizer);
 
-        Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1));
-        Sheet sheet2 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet2));
-        Sheet sheet3 = sheetFactory.Create(rowsSheet3, customizer.Sheet3, customizer.GetCustomizedColumns(customizer.Sheet3));
+        Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1), customizer.GetCustomizedCells(customizer.Sheet1));
+        Sheet sheet2 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet2), customizer.GetCustomizedCells(customizer.Sheet2));
+        Sheet sheet3 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet3), customizer.GetCustomizedCells(customizer.Sheet3));
 
         Workbook excelWorkbook = workbookFactory.Create(new List<Sheet> { sheet1, sheet2, sheet3 }, customizer.Workbook);
         return GetStream(excelWorkbook);

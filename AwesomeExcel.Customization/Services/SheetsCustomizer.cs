@@ -10,6 +10,7 @@ public abstract class SheetsCustomizer : ISheetsCustomizer
     public WorkbookCustomization Workbook { get; } = new();
 
     private Dictionary<SheetCustomization, ColumnsCustomizer> dict = new();
+    private Dictionary<SheetCustomization, CellsCustomizer> cells = new();
 
     public ColumnCustomization GetColumn<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
     {
@@ -34,6 +35,12 @@ public abstract class SheetsCustomizer : ISheetsCustomizer
     public IReadOnlyDictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumns<T>(SheetCustomization<T> sheet)
     {
         IReadOnlyDictionary<PropertyInfo, ColumnCustomization> ccs = dict[sheet].GetCustomizedColumn();
+        return ccs;
+    }
+
+    public IReadOnlyDictionary<PropertyInfo, CellCustomization> GetCustomizedCells<T>(SheetCustomization<T> sheet)
+    {
+        IReadOnlyDictionary<PropertyInfo, CellCustomization> ccs = cells[sheet].GetCustomizedCells();
         return ccs;
     }
 }
