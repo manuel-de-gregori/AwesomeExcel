@@ -29,7 +29,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void Create_CustomColumnsName_ShouldReturn_GivenCustomNames()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null,GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null,GetCustomizedColumn(), null);
 
         Assert.AreEqual(sheet.Columns.Count, 4);
         Assert.AreEqual(sheet.Columns[0].Name, "Actor's name");
@@ -42,7 +42,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_NullChecks()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn(), null);
 
         Assert.IsNotNull(sheet);
         Assert.IsNotNull(sheet.Columns);
@@ -67,7 +67,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column0_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn(), null);
 
         Column column0 = sheet.Columns[0];
         Assert.AreEqual(column0.Style.HorizontalAlignment, HorizontalAlignment.Right);
@@ -77,7 +77,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column1_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn(), null);
 
         Column column1 = sheet.Columns[1];
         Assert.AreEqual(column1.Style.FillForegroundColor, Color.Blue);
@@ -87,7 +87,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column2_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn(), null);
 
         Column column2 = sheet.Columns[2];
         Assert.IsTrue(column2.Style.FontStyle.IsBold);
@@ -98,7 +98,7 @@ public class SheetFactory_ColumnCustomizationServiceTest
     public void CreateSheet_Column3_CustomStyle_ShouldReturn_CustomizedStyle()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, GetCustomizedColumn());
+        Sheet sheet = factory.Create(data, null, GetCustomizedColumn(), null);
 
         Column column3 = sheet.Columns[3];
         Assert.AreEqual(actual: column3.Style.BorderBottomColor, expected: Color.Green);

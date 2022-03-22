@@ -43,7 +43,7 @@ public class WorkbookFactoryTest
         SheetFactory factory = new();
         WorkbookFactory workbookFactory = new();
 
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
         Workbook wb = workbookFactory.Create(new[] { sheet }, (WorkbookCustomization)null);
 
         Assert.IsNotNull(wb);
@@ -55,7 +55,7 @@ public class WorkbookFactoryTest
         SheetFactory factory = new();
         WorkbookFactory workbookFactory = new();
 
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
         Workbook wb = workbookFactory.Create(new[] { sheet }, (WorkbookCustomization)null);
 
         Assert.IsNotNull(wb.Sheets);
@@ -67,7 +67,7 @@ public class WorkbookFactoryTest
         SheetFactory factory = new();
         WorkbookFactory workbookFactory = new();
 
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
         Workbook wb = workbookFactory.Create(new[] { sheet }, (WorkbookCustomization)null);
 
         Assert.AreEqual(wb.Sheets.Count, 1);

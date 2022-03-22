@@ -39,6 +39,9 @@ public class Class2
 
             sps.GetColumn(p => p.BirthDate)
                 .SetStyle(s => s.DateTimeFormat = "dd/mm/yyyy");
+
+            sps.GetCells(p => p.BirthDate)
+                .SetFillForegroundColor(birthDate => birthDate.HasValue && birthDate.Value.Month == 3 ? Color.Red : Color.Blue);
         });
 
         string fileName = nameof(Class2) + "-" + nameof(TestMethod1) + ".xlsx";

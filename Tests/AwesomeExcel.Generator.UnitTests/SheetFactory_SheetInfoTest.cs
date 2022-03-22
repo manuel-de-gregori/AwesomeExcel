@@ -24,7 +24,7 @@ public class SheetFactory_SheetInfoTest
         };
 
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, si, null);
+        Sheet sheet = factory.Create(data, si, null, null);
 
         Assert.AreEqual(sheet.Name, nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues));
         Assert.AreEqual(sheet.HasHeader, true);
@@ -43,7 +43,7 @@ public class SheetFactory_SheetInfoTest
 
 
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, si, null);
+        Sheet sheet = factory.Create(data, si, null, null);
 
         Assert.AreEqual(sheet.Name, nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues_2));
         Assert.AreEqual(sheet.HasHeader, false);
@@ -68,7 +68,7 @@ public class SheetFactory_SheetInfoTest
         };
 
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, si, null);
+        Sheet sheet = factory.Create(data, si, null, null);
 
         Assert.AreEqual(sheet.Style.BorderBottomColor, Color.Aqua);
         Assert.AreEqual(sheet.Style.BorderTopColor, Color.Red);

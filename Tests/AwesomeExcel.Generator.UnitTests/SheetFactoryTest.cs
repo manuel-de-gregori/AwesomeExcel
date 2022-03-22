@@ -19,7 +19,7 @@ public class SheetFactoryTest
     {
         SheetFactory factory = new();
         List<Person> rows = null;
-        Assert.ThrowsException<ArgumentNullException>(() => factory.Create(rows, null, null));
+        Assert.ThrowsException<ArgumentNullException>(() => factory.Create(rows, null, null, null));
     }
 
     [TestMethod]
@@ -27,14 +27,14 @@ public class SheetFactoryTest
     {
         SheetFactory factory = new();
         List<Person> rows = new() { null };
-        Assert.ThrowsException<InvalidOperationException>(() => factory.Create(rows, null, null));
+        Assert.ThrowsException<InvalidOperationException>(() => factory.Create(rows, null, null, null));
     }
 
     [TestMethod]
     public void Create_Sheet_ShouldNotBe_Null()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         Assert.IsNotNull(sheet);
     }
@@ -43,7 +43,7 @@ public class SheetFactoryTest
     public void Create_Columns_ShouldNotBe_Null()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
         Assert.IsNotNull(sheet.Columns);
     }
 
@@ -51,7 +51,7 @@ public class SheetFactoryTest
     public void Create_ColumnsCount_ShouldBe_Four()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         Assert.AreEqual(sheet.Columns.Count, 4);
     }
@@ -60,7 +60,7 @@ public class SheetFactoryTest
     public void Create_Columns_ShouldHave_SpecifiedName()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         // First column
         Assert.AreEqual(sheet.Columns[0].Name, nameof(Person.Name));
@@ -80,7 +80,7 @@ public class SheetFactoryTest
     public void Create_Columns_ShouldHave_RightType()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         // First column
         Assert.AreEqual(sheet.Columns[0].ColumnType, ColumnType.String);
@@ -99,7 +99,7 @@ public class SheetFactoryTest
     public void Create_Rows_ShouldNotBe_Null()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         // Rows
         Assert.IsNotNull(sheet.Rows);
@@ -110,7 +110,7 @@ public class SheetFactoryTest
     public void Create_FirstRow_ShouldNotBe_Null()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         Row firstRow = sheet.Rows[0];
         Assert.IsNotNull(firstRow);
@@ -120,7 +120,7 @@ public class SheetFactoryTest
     public void Create_Cells_ShouldNotBe_Null()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         // Cells
         Row firstRow = sheet.Rows[0];
@@ -132,7 +132,7 @@ public class SheetFactoryTest
     public void Create_Cells_ShouldHave_SpecifiedValues()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null);
+        Sheet sheet = factory.Create(data, null, null, null);
 
         // Cells
         Row firstRow = sheet.Rows[0];
