@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace AwesomeExcel.Customization.Services;
 
-public abstract class ManySheetsCustomizer : IManySheetsCustomizer
+public abstract class SheetsCustomizer : ISheetsCustomizer
 {
     public WorkbookCustomization Workbook { get; } = new();
 
@@ -38,20 +38,20 @@ public abstract class ManySheetsCustomizer : IManySheetsCustomizer
     }
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2> : ManySheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2>
+public class SheetsCustomizer<TSheet1, TSheet2> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> : ManySheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3>
+public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
     public SheetCustomization<TSheet3> Sheet3 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : ManySheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4>
+public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
@@ -59,7 +59,7 @@ public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : Many
     public SheetCustomization<TSheet4> Sheet4 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : ManySheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5>
+public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();

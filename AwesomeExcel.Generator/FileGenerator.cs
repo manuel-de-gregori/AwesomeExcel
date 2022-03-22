@@ -22,12 +22,12 @@ public abstract class FileGenerator<TWorkbook>
     /// <returns>The MemoryStream of the Excel file.</returns>
     public MemoryStream Generate<TSheet>(IEnumerable<TSheet> rows, Action<ISheetCustomizer<TSheet>> action)
     {
-        SingleSheetCustomizer<TSheet> sps = new();
-        action(sps);
+        SheetCustomizer<TSheet> customizer = new();
+        action(customizer);
 
-        Sheet sheet = sheetFactory.Create(rows, sps.Sheet, sps.GetCustomizedColumns());
+        Sheet sheet = sheetFactory.Create(rows, customizer.Sheet, customizer.GetCustomizedColumns());
 
-        Workbook excelWorkbook = workbookFactory.Create(new Sheet[1] { sheet }, sps.Workbook);
+        Workbook excelWorkbook = workbookFactory.Create(new Sheet[1] { sheet }, customizer.Workbook);
         return GetStream(excelWorkbook);
     }
 
@@ -42,13 +42,13 @@ public abstract class FileGenerator<TWorkbook>
     /// <returns>The MemoryStream of the Excel file.</returns>
     public MemoryStream Generate<TSheet1, TSheet2>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, Action<ISheetsCustomizer<TSheet1, TSheet2>> action)
     {
-        MultipleSheetsCustomizer<TSheet1, TSheet2> msps = new();
-        action(msps);
+        SheetsCustomizer<TSheet1, TSheet2> customizer = new();
+        action(customizer);
 
-        Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheet1, msps.GetCustomizedColumns(msps.Sheet1));
-        Sheet sheet2 = sheetFactory.Create(rowsSheet2, msps.Sheet2, msps.GetCustomizedColumns(msps.Sheet2));
+        Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1));
+        Sheet sheet2 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet2));
 
-        Workbook excelWorkbook = workbookFactory.Create(new Sheet[] { sheet1, sheet2 }, msps.Workbook);
+        Workbook excelWorkbook = workbookFactory.Create(new Sheet[] { sheet1, sheet2 }, customizer.Workbook);
         return GetStream(excelWorkbook);
     }
 
@@ -65,14 +65,14 @@ public abstract class FileGenerator<TWorkbook>
     /// <returns>The MemoryStream of the Excel file.</returns>
     public MemoryStream Generate<TSheet1, TSheet2, TSheet3>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, IEnumerable<TSheet3> rowsSheet3, Action<ISheetsCustomizer<TSheet1, TSheet2, TSheet3>> action)
     {
-        MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> msps = new();
-        action(msps);
+        MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> customizer = new();
+        action(customizer);
 
-        Sheet sheet1 = sheetFactory.Create(rowsSheet1, msps.Sheet1, msps.GetCustomizedColumns(msps.Sheet1));
-        Sheet sheet2 = sheetFactory.Create(rowsSheet2, msps.Sheet2, msps.GetCustomizedColumns(msps.Sheet2));
-        Sheet sheet3 = sheetFactory.Create(rowsSheet3, msps.Sheet3, msps.GetCustomizedColumns(msps.Sheet3));
+        Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1));
+        Sheet sheet2 = sheetFactory.Create(rowsSheet2, customizer.Sheet2, customizer.GetCustomizedColumns(customizer.Sheet2));
+        Sheet sheet3 = sheetFactory.Create(rowsSheet3, customizer.Sheet3, customizer.GetCustomizedColumns(customizer.Sheet3));
 
-        Workbook excelWorkbook = workbookFactory.Create(new List<Sheet> { sheet1, sheet2, sheet3 }, msps.Workbook);
+        Workbook excelWorkbook = workbookFactory.Create(new List<Sheet> { sheet1, sheet2, sheet3 }, customizer.Workbook);
         return GetStream(excelWorkbook);
     }
 
