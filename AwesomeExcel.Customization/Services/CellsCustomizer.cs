@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace AwesomeExcel.Customization.Services;
 
-internal class CellsCustomizer<T>
+internal class CellsCustomizer
 {
     private readonly Dictionary<PropertyInfo, CellCustomization> customizedCells = new();
 
@@ -13,7 +13,7 @@ internal class CellsCustomizer<T>
         return value;
     }
 
-    public CellCustomization GetOrCreateCells(PropertyInfo pi)
+    public CellCustomization GetOrCreateCells<T>(PropertyInfo pi)
     {
         if (customizedCells.TryGetValue(pi, out CellCustomization value))
         {
@@ -21,9 +21,16 @@ internal class CellsCustomizer<T>
         }
         else
         {
-            CellCustomization ci = new();
+            CellCustomization<T> ci = new();
             customizedCells.Add(pi, ci);
             return ci;
         }
     }
+
+    public IReadOnlyDictionary<PropertyInfo, CellCustomization> GetCustomizedCells()
+    {
+        return customizedCells;
+    }
 }
+
+internal class CellsCustomizer<T> : CellsCustomizer { }
