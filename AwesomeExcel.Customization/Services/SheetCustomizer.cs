@@ -19,17 +19,23 @@ public class SheetCustomizer<T> : ISheetCustomizer<T>
         var x = ccs.GetOrCreateColumn(pi);
         return x;
     }
-    public CellCustomization GetCells<TProperty>(Expression<Func<T, TProperty>> selector)
+    public CellCustomization<TProperty> GetCells<TProperty>(Expression<Func<T, TProperty>> selector)
     {
         MemberExpression me = selector.Body as MemberExpression;
         PropertyInfo pi = me.Member as PropertyInfo;
 
-        return cells.GetOrCreateCells(pi);
+        return (CellCustomization<TProperty>)cells.GetOrCreateCells<TProperty>(pi);
     }
 
     public IReadOnlyDictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumns()
     {
         IReadOnlyDictionary<PropertyInfo, ColumnCustomization> x = ccs.GetCustomizedColumn();
+        return x;
+    }
+
+    public IReadOnlyDictionary<PropertyInfo, CellCustomization> GetCustomizedCells()
+    {
+        IReadOnlyDictionary<PropertyInfo, CellCustomization> x = cells.GetCustomizedCells();
         return x;
     }
 }
