@@ -160,7 +160,7 @@ public class CellStyleCustomizationResolver
 
     private T GetValue<T>(CellStyleCustomization sc, string pName, object value)
     {
-        Type type = typeof(CellStyleCustomization<object>);
+        Type type = sc.GetType();
         PropertyInfo pi = type.GetProperty(pName);
         var pValue = (Delegate)pi.GetValue(sc);
         var result = Invoke<T>(pValue, value);
