@@ -11,23 +11,32 @@ namespace AwesomeExcel.Customization.Services;
 
 public class CellStyleCustomizationResolver
 {
-    public Style Resolve(CellCustomization customization, object value)
+    private readonly CellCustomization customization;
+    private readonly object value;
+
+    public CellStyleCustomizationResolver(CellCustomization customization, object value)
     {
-        CellStyleCustomization csc = (CellStyleCustomization)customization.GetType().GetProperty("Style").GetValue(customization);
+        this.customization = customization;
+        this.value = value;
+    }
+
+    public Style Resolve()
+    {
+        CellStyleCustomization csc = GetCellStyleCustomization(customization);
 
         if (csc is null)
             return null;
 
-        Color? borderTopColor = GetBorderTopColor(csc, value);
-        Color? borderBottomColor = GetBorderBottomColor(csc, value);
-        Color? borderLeftColor = GetBorderLeftColor(csc, value);
-        Color? borderRightColor = GetBorderRightColor(csc, value);
-        Color? fillForegroundColor = GetFillForegroundColor(csc, value);
-        FillPattern? fillPattern = GetFillPattern(csc, value);
-        string dateTimeFormat = GetDateTimeFormat(csc, value);
-        HorizontalAlignment? horizontalAlignment = GetHorizontalAlignment(csc, value);
-        VerticalAlignment? verticalAlignment = GetVerticalAlignment(csc, value);
-        FontStyle fontStyle = GetFontStyle(value, csc);
+        Color? borderTopColor = GetBorderTopColor(csc);
+        Color? borderBottomColor = GetBorderBottomColor(csc);
+        Color? borderLeftColor = GetBorderLeftColor(csc);
+        Color? borderRightColor = GetBorderRightColor(csc);
+        Color? fillForegroundColor = GetFillForegroundColor(csc);
+        FillPattern? fillPattern = GetFillPattern(csc);
+        string dateTimeFormat = GetDateTimeFormat(csc);
+        HorizontalAlignment? horizontalAlignment = GetHorizontalAlignment(csc);
+        VerticalAlignment? verticalAlignment = GetVerticalAlignment(csc);
+        FontStyle fontStyle = GetFontStyle(csc);
 
         return new Style
         {
@@ -44,17 +53,26 @@ public class CellStyleCustomizationResolver
         };
     }
 
-    private FontStyle GetFontStyle(object value, CellStyleCustomization sc)
+    private CellStyleCustomization GetCellStyleCustomization(CellCustomization customization)
     {
-        CellFontStyleCustomization cfsc = GetFontStyleCustomization(sc, value);
+        string pName = nameof(CellCustomization<object>.Style);
+        Type type = customization.GetType();
+        PropertyInfo pi = type.GetProperty(pName);
+        var csc = (CellStyleCustomization)pi.GetValue(customization);
+        return csc;
+    }
+
+    private FontStyle GetFontStyle(CellStyleCustomization sc)
+    {
+        CellFontStyleCustomization cfsc = GetFontStyleCustomization(sc);
 
         if (cfsc is null)
             return null;
 
-        Color? color = GetFontColor(cfsc, value);
-        short? heightInPoints = GetFontHeightInPoints(cfsc, value);
-        bool? isBold = GetFontBold(cfsc, value);
-        string name = GetFontName(cfsc, value);
+        Color? color = GetFontColor(cfsc);
+        short? heightInPoints = GetFontHeightInPoints(cfsc);
+        bool? isBold = GetFontBold(cfsc);
+        string name = GetFontName(cfsc);
 
         return new FontStyle
         {
@@ -65,85 +83,85 @@ public class CellStyleCustomizationResolver
         };
     }
 
-    private Color? GetBorderTopColor(CellStyleCustomization sc, object value)
+    private Color? GetBorderTopColor(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.BorderTopColor);
         return GetValue<Color?>(sc, pName, value);
     }
 
-    private Color? GetBorderBottomColor(CellStyleCustomization sc, object value)
+    private Color? GetBorderBottomColor(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.BorderBottomColor);
         return GetValue<Color?>(sc, pName, value);
     }
 
-    private Color? GetBorderLeftColor(CellStyleCustomization sc, object value)
+    private Color? GetBorderLeftColor(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.BorderLeftColor);
         return GetValue<Color?>(sc, pName, value);
     }
 
-    private Color? GetBorderRightColor(CellStyleCustomization sc, object value)
+    private Color? GetBorderRightColor(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.BorderRightColor);
         return GetValue<Color?>(sc, pName, value);
     }
 
-    private Color? GetFillForegroundColor(CellStyleCustomization sc, object value)
+    private Color? GetFillForegroundColor(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.FillForegroundColor);
         return GetValue<Color?>(sc, pName, value);
     }
 
-    private FillPattern? GetFillPattern(CellStyleCustomization sc, object value)
+    private FillPattern? GetFillPattern(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.FillPattern);
         return GetValue<FillPattern?>(sc, pName, value);
     }
 
-    private HorizontalAlignment? GetHorizontalAlignment(CellStyleCustomization sc, object value)
+    private HorizontalAlignment? GetHorizontalAlignment(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.HorizontalAlignment);
         return GetValue<HorizontalAlignment?>(sc, pName, value);
     }
 
-    private VerticalAlignment? GetVerticalAlignment(CellStyleCustomization sc, object value)
+    private VerticalAlignment? GetVerticalAlignment(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.VerticalAlignment);
         return GetValue<VerticalAlignment?>(sc, pName, value);
     }
 
-    private string GetDateTimeFormat(CellStyleCustomization sc, object value)
+    private string GetDateTimeFormat(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.DateTimeFormat);
         return GetValue<string>(sc, pName, value);
     }
 
-    private CellFontStyleCustomization GetFontStyleCustomization(CellStyleCustomization sc, object value)
+    private CellFontStyleCustomization GetFontStyleCustomization(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.FontStyle);
         return GetValue<CellFontStyleCustomization>(sc, pName, value);
     }
 
-    private Color? GetFontColor(CellFontStyleCustomization cfsc, object value)
+    private Color? GetFontColor(CellFontStyleCustomization cfsc)
     {
         const string pName = nameof(CellFontStyleCustomization<object>.Color);
         return GetFontValue<Color?>(cfsc, pName, value);
     }
 
-    private short? GetFontHeightInPoints(CellFontStyleCustomization cfsc, object value)
+    private short? GetFontHeightInPoints(CellFontStyleCustomization cfsc)
     {
         const string pName = nameof(CellFontStyleCustomization<object>.HeightInPoints);
         return GetFontValue<short?>(cfsc, pName, value);
     }
 
-    private bool? GetFontBold(CellFontStyleCustomization cfsc, object value)
+    private bool? GetFontBold(CellFontStyleCustomization cfsc)
     {
         const string pName = nameof(CellFontStyleCustomization<object>.IsBold);
         return GetFontValue<bool?>(cfsc, pName, value);
     }
 
-    private string GetFontName(CellFontStyleCustomization cfsc, object value)
+    private string GetFontName(CellFontStyleCustomization cfsc)
     {
         const string pName = nameof(CellFontStyleCustomization<object>.Name);
         return GetFontValue<string>(cfsc, pName, value);
@@ -167,7 +185,7 @@ public class CellStyleCustomizationResolver
         return result;
     }
 
-    private T Invoke<T>(Delegate fn, object value)
+    private static T Invoke<T>(Delegate fn, object value)
     {
         return (T)fn?.Method.Invoke(fn.Target, new[] { value });
     }

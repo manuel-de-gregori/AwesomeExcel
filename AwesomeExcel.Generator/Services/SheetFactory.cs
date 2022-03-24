@@ -89,8 +89,8 @@ internal class SheetFactory
                 }
                 else
                 {
-                    var resolver = new CellStyleCustomizationResolver();
-                    Style s = resolver.Resolve(cellCustomization, pValue);
+                    var resolver = new CellStyleCustomizationResolver(cellCustomization, pValue);
+                    Style s = resolver.Resolve();
                     return new Cell
                     {
                         Value = pValue,
