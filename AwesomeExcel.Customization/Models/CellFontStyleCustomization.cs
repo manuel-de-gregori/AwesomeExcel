@@ -2,9 +2,9 @@
 
 namespace AwesomeExcel.Customization.Models;
 
-public class FontStyleCustomization { }
+public class CellFontStyleCustomization { }
 
-public class FontStyleCustomization<T> : FontStyleCustomization
+public class CellFontStyleCustomization<T> : CellFontStyleCustomization
 {
     public Func<T, string> Name { get; set; }
     public Func<T, Color?> Color { get; set; }

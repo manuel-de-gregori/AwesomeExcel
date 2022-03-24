@@ -2,9 +2,9 @@
 
 namespace AwesomeExcel.Customization.Models;
 
-public class StyleCustomization { }
+public class CellStyleCustomization { }
 
-public class StyleCustomization<T> : StyleCustomization
+public class CellStyleCustomization<T> : CellStyleCustomization
 {
     public Func<T, Color?> BorderTopColor { get; set; }
     public Func<T, Color?> BorderBottomColor { get; set; }
@@ -16,5 +16,5 @@ public class StyleCustomization<T> : StyleCustomization
     public Func<T, HorizontalAlignment?> HorizontalAlignment { get; set; }
     public Func<T, VerticalAlignment?> VerticalAlignment { get; set; }
 
-    public FontStyleCustomization<T> FontStyle { get; set; }
+    public CellFontStyleCustomization<T> FontStyle { get; set; }
 }
