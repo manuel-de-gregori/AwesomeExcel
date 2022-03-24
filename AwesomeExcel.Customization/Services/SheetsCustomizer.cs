@@ -34,12 +34,18 @@ public abstract class SheetsCustomizer : ISheetsCustomizer
 
     public IReadOnlyDictionary<PropertyInfo, ColumnCustomization> GetCustomizedColumns<T>(SheetCustomization<T> sheet)
     {
+        if (!dict.ContainsKey(sheet))
+            return null;
+
         IReadOnlyDictionary<PropertyInfo, ColumnCustomization> ccs = dict[sheet].GetCustomizedColumn();
         return ccs;
     }
 
     public IReadOnlyDictionary<PropertyInfo, CellCustomization> GetCustomizedCells<T>(SheetCustomization<T> sheet)
     {
+        if (!cells.ContainsKey(sheet))
+            return null;
+
         IReadOnlyDictionary<PropertyInfo, CellCustomization> ccs = cells[sheet].GetCustomizedCells();
         return ccs;
     }
