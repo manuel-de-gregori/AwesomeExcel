@@ -41,7 +41,7 @@ public class Class2
                 .SetStyle(s => s.DateTimeFormat = "dd/mm/yyyy");
 
             sps.GetCells(p => p.BirthDate)
-                .SetFillForegroundColor(birthDate => birthDate.HasValue && birthDate.Value.Month == 3 ? Color.Red : Color.Blue);
+                .SetFillForegroundColor(birthDate => birthDate.HasValue && birthDate.Value.Month == 3 ? Color.Red : Color.Yellow);
         });
 
         string fileName = nameof(Class2) + "-" + nameof(TestMethod1) + ".xlsx";
@@ -83,6 +83,20 @@ public class Class2
             sps.GetColumn(sps.Sheet2, p => p.Amount)
                 .SetFillForegroundColor(Color.Green);
         });
+
+        string fileName = nameof(Class2) + "-" + nameof(TestMethod2) + ".xlsx";
+        WriteFile(file, fileName);
+    }
+
+    [TestMethod]
+    public void TestMethod3()
+    {
+        List<Person> people = GetActors();
+        List<Invoice> invoices = GetInvoices();
+
+        var fileGenerator = new BridgeNpoi.NpoiFileGenerator();
+
+        MemoryStream file = fileGenerator.Generate(people, invoices, (c) => { });
 
         string fileName = nameof(Class2) + "-" + nameof(TestMethod2) + ".xlsx";
         WriteFile(file, fileName);

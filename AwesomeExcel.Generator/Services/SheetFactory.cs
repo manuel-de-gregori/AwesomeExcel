@@ -1,5 +1,6 @@
 ﻿using AwesomeExcel.Common.Models;
 using AwesomeExcel.Customization.Models;
+using AwesomeExcel.Customization.Services;
 using System.Collections;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -88,7 +89,8 @@ internal class SheetFactory
                 }
                 else
                 {
-                    Style s = GetCellStyle(cellCustomization, pValue);
+                    var resolver = new CellStyleCustomizationResolver();
+                    Style s = resolver.Resolve(cellCustomization, pValue);
                     return new Cell
                     {
                         Value = pValue,
@@ -175,63 +177,5 @@ internal class SheetFactory
         {
             throw new NotSupportedException();
         }
-    }
-
-    private Style GetCellStyle(CellCustomization customization, object value)
-    {
-        StyleCustomization sc = (StyleCustomization)customization.GetType().GetProperty("Style").GetValue(customization);
-
-        if (sc is null)
-            return null;
-
-        Type scType = sc.GetType();
-        StyleCustomization<object> _;
-
-        var borderTopColorFn = (Func<object, Color?>)scType.GetProperty(nameof(_.BorderTopColor)).GetValue(sc);
-        var borderBottomColorFn = (Func<object, Color?>)scType.GetProperty(nameof(_.BorderBottomColor)).GetValue(sc);
-        var borderLeftColorFn = (Func<object, Color?>)scType.GetProperty(nameof(_.BorderLeftColor)).GetValue(sc);
-        var borderRightColorFn = (Func<object, Color?>)scType.GetProperty(nameof(_.BorderRightColor)).GetValue(sc);
-        var fillForegroundColorFn = (Delegate)scType.GetProperty(nameof(_.FillForegroundColor)).GetValue(sc);
-        var fillPatternFn = (Func<object, FillPattern?>)scType.GetProperty(nameof(_.FillPattern)).GetValue(sc);
-        var dateTimeFormatFn = (Func<object, string>)scType.GetProperty(nameof(_.DateTimeFormat)).GetValue(sc);
-        var horizontalAlignmentFn = (Func<object, HorizontalAlignment?>)scType.GetProperty(nameof(_.HorizontalAlignment)).GetValue(sc);
-        var verticalAlignmentFn = (Func<object, VerticalAlignment?>)scType.GetProperty(nameof(_.VerticalAlignment)).GetValue(sc);
-
-        var fontStyleCustomization = (FontStyleCustomization)scType.GetProperty(nameof(_.FontStyle)).GetValue(sc);
-
-        FontStyle fontStyle = null;
-
-        if (fontStyleCustomization is not null)
-        {
-            Type fscType = fontStyleCustomization.GetType();
-            FontStyleCustomization<object> __;
-
-            var colorFn = (Func<object, Color?>)fscType.GetProperty(nameof(__.Color)).GetValue(fontStyleCustomization);
-            var heightInPointsFn = (Func<object, short?>)fscType.GetProperty(nameof(__.HeightInPoints)).GetValue(fontStyleCustomization);
-            var isBoldFn = (Func<object, bool?>)fscType.GetProperty(nameof(__.IsBold)).GetValue(fontStyleCustomization);
-            var nameFn = (Func<object, string>)fscType.GetProperty(nameof(__.Name)).GetValue(fontStyleCustomization);
-
-            fontStyle = new FontStyle
-            {
-                Color = colorFn?.Invoke(value),
-                HeightInPoints = heightInPointsFn?.Invoke(value),
-                IsBold = isBoldFn?.Invoke(value),
-                Name = nameFn?.Invoke(value)
-            };
-        }
-
-        return new Style
-        {
-            BorderTopColor = borderTopColorFn?.Invoke(value),
-            BorderBottomColor = borderBottomColorFn?.Invoke(value),
-            BorderLeftColor = borderLeftColorFn?.Invoke(value),
-            BorderRightColor = borderRightColorFn?.Invoke(value),
-            FillForegroundColor = (Color?)fillForegroundColorFn?.Method.Invoke(fillForegroundColorFn.Target, new[] { value }),
-            FillPattern = fillPatternFn?.Invoke(value),
-            DateTimeFormat = dateTimeFormatFn?.Invoke(value),
-            HorizontalAlignment = horizontalAlignmentFn?.Invoke(value),
-            VerticalAlignment = verticalAlignmentFn?.Invoke(value),
-            FontStyle = fontStyle
-        };
     }
 }
