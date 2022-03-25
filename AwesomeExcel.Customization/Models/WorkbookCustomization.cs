@@ -4,5 +4,5 @@ namespace AwesomeExcel.Customization.Models;
 
 public class WorkbookCustomization
 {
-    public FileType FileType { get; set; }
+    public FileType FileType { get; set; } = FileType.Xlsx;
 }
