@@ -28,28 +28,17 @@ public class SheetFactory_CellsCustomizationTest
     };
 
     [TestMethod]
-    public void CreateSheet_NullChecks()
+    public void CreateSheet_NullCellsCustomization_Successfull()
     {
         SheetFactory factory = new();
-        Sheet sheet = factory.Create(data, null, null, GetCustomizedCells());
+        Sheet sheet = factory.Create(data, null, null, null);
+    }
 
-        Assert.IsNotNull(sheet);
-        Assert.IsNotNull(sheet.Columns);
-        Assert.IsNotNull(sheet.Rows);
-        Assert.IsNull(sheet.Style);
-        Assert.IsNull(sheet.HeaderStyle);
-
-        Cell cell0 = sheet.Rows[0].Cells[0];
-        Assert.IsNotNull(cell0.Style);
-
-        Column column1 = sheet.Columns[1];
-        Assert.IsNotNull(column1.Style);
-
-        Column column2 = sheet.Columns[2];
-        Assert.IsNotNull(column2.Style?.FontStyle);
-
-        Column column3 = sheet.Columns[3];
-        Assert.IsNotNull(column3.Style?.FontStyle);
+    [TestMethod]
+    public void CreateSheet_EmptyCellsCustomization_Successfull()
+    {
+        SheetFactory factory = new();
+        Sheet sheet = factory.Create(data, null, null, new Dictionary<PropertyInfo, CellCustomization>());
     }
 
     [TestMethod]
@@ -97,9 +86,18 @@ public class SheetFactory_CellsCustomizationTest
         SheetFactory factory = new();
         Sheet sheet = factory.Create(data, null, null, GetCustomizedCells());
 
-        Column column2 = sheet.Columns[2];
-        Assert.IsTrue(column2.Style.FontStyle.IsBold);
-        Assert.AreEqual(column2.Style.FontStyle.Color, Color.Red);
+        foreach (Row row in sheet.Rows)
+        {
+            const int columnBirthDate = 2;
+            Cell cell = row.Cells[columnBirthDate];
+            var birthDate = (DateTime)cell.Value;
+
+            bool expectedBold = birthDate.Month <= 6;
+            Assert.AreEqual(actual: cell.Style.FontStyle.IsBold, expected: expectedBold);
+
+            Color expectedFontColor = birthDate < new DateTime(1950, 1, 1) ? Color.Red : Color.SkyBlue;
+            Assert.AreEqual(actual: cell.Style.FontStyle.Color, expected: expectedFontColor);
+        }
     }
 
     [TestMethod]
@@ -108,21 +106,18 @@ public class SheetFactory_CellsCustomizationTest
         SheetFactory factory = new();
         Sheet sheet = factory.Create(data, null, null, GetCustomizedCells());
 
-        Column column3 = sheet.Columns[3];
-        Assert.AreEqual(actual: column3.Style.BorderBottomColor, expected: Color.Green);
-        Assert.AreEqual(actual: column3.Style.BorderLeftColor, expected: Color.IceBlue);
-        Assert.AreEqual(actual: column3.Style.BorderRightColor, expected: Color.Lime);
-        Assert.AreEqual(actual: column3.Style.BorderTopColor, expected: Color.Red);
-        Assert.AreEqual(actual: column3.Style.FillForegroundColor, expected: Color.Ivory);
-        //Assert.AreEqual(actual: column3.Style.FillPattern, expected: FillPattern.SolidForeground);
-        Assert.AreEqual(actual: column3.Style.HorizontalAlignment, expected: HorizontalAlignment.Right);
-        Assert.AreEqual(actual: column3.Style.VerticalAlignment, expected: VerticalAlignment.Bottom);
-        //Assert.AreEqual(actual: fourhColumn.Style.DateTimeFormat, expected: "a5b2");
+        foreach (Row row in sheet.Rows)
+        {
+            const int columnAge = 3;
+            Cell cell = row.Cells[columnAge];
+            var age = (int)cell.Value;
 
-        Assert.AreEqual(actual: column3.Style.FontStyle.Color, expected: Color.Yellow);
-        Assert.AreEqual(actual: column3.Style.FontStyle.HeightInPoints, expected: (short)12);
-        Assert.AreEqual(actual: column3.Style.FontStyle.IsBold, expected: null);
-        Assert.AreEqual(actual: column3.Style.FontStyle.Name, expected: "AwesomeExcel");
+            VerticalAlignment? expectedVerticalAlignment = age > 500 ? VerticalAlignment.Bottom : null;
+            Assert.AreEqual(actual: cell.Style.VerticalAlignment, expected: expectedVerticalAlignment);
+
+            short expectedHeight = (short)(age % 32767);
+            Assert.AreEqual(actual: cell.Style.FontStyle.HeightInPoints, expected: expectedHeight);
+        }
     }
 
     private class Person
@@ -146,33 +141,18 @@ public class SheetFactory_CellsCustomizationTest
 
     private CellCustomization GetColumnAge()
     {
-        CellCustomization<int> customizedColumn = new();
-
-        customizedColumn
-            .SetBorderLeftColor(value => Color.IceBlue)
-            .SetBorderRightColor(value => Color.Lime)
-            .SetBorderTopColor(value => Color.Red)
-            .SetBorderBottomColor(value => Color.Green)
-            .SetFontHeightInPoints(value => 12)
-            .SetFontColor(value => Color.Yellow)
-            .SetHorizontalAlignment(value => HorizontalAlignment.Right)
-            .SetVerticalAlignment(value => VerticalAlignment.Bottom)
-            .SetFillForegroundColor(value => Color.Ivory)
-            .SetFontName(value => "AwesomeExcel");
-
-
-        return customizedColumn;
+        return new CellCustomization<int>()
+            .SetFontHeightInPoints(value => (short)(value % 32767))
+            .SetVerticalAlignment(value => value > 500 ? VerticalAlignment.Bottom : null);
     }
 
     private CellCustomization GetColumnBirthDate()
     {
-        CellCustomization<DateTime> customizedColumn = new();
+        DateTime dt1950 = new(1950, 1, 1);
 
-        customizedColumn
-            .SetFontBold(value => true)
-            .SetFontColor(value => Color.Red);
-
-        return customizedColumn;
+        return new CellCustomization<DateTime>()
+            .SetFontBold(value => value.Month <= 6)
+            .SetFontColor(value => value < dt1950 ? Color.Red : Color.SkyBlue);
     }
 
     private CellCustomization GetColumnSurname()
@@ -193,10 +173,7 @@ public class SheetFactory_CellsCustomizationTest
 
     private CellCustomization<string> GetColumnName()
     {
-        CellCustomization<string> _customizedColumn = new();
-
-        _customizedColumn.SetHorizontalAlignment(s => HorizontalAlignment.Right);
-
-        return _customizedColumn;
+        return new CellCustomization<string>()
+            .SetHorizontalAlignment(s => HorizontalAlignment.Right);
     }
 }
