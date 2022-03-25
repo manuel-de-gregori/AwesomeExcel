@@ -11,7 +11,7 @@ public class SheetCustomizer<T> : ISheetCustomizer<T>
 
     public WorkbookCustomization Workbook { get; } = new();
     public SheetCustomization<T> Sheet { get; } = new();
-    public ColumnCustomization GetColumn<TProperty>(Expression<Func<T, TProperty>> selector)
+    public ColumnCustomization Column<TProperty>(Expression<Func<T, TProperty>> selector)
     {
         MemberExpression me = selector.Body as MemberExpression;
         PropertyInfo pi = me.Member as PropertyInfo;
@@ -19,7 +19,7 @@ public class SheetCustomizer<T> : ISheetCustomizer<T>
         var x = ccs.GetOrCreateColumn(pi);
         return x;
     }
-    public CellCustomization<TProperty> GetCells<TProperty>(Expression<Func<T, TProperty>> selector)
+    public CellCustomization<TProperty> Cells<TProperty>(Expression<Func<T, TProperty>> selector)
     {
         MemberExpression me = selector.Body as MemberExpression;
         PropertyInfo pi = me.Member as PropertyInfo;

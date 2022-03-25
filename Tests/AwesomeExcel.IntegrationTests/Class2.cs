@@ -29,18 +29,18 @@ public class Class2
                 .SetHeaderBorderBottomColor(Color.Red)
                 .SetVerticalAlignment(VerticalAlignment.Center);
 
-            sps.GetColumn(p => p.Name)
+            sps.Column(p => p.Name)
                 .SetName("Actor's name")
                 .SetStyle(s => s.FillForegroundColor = Color.Aqua);
 
-            sps.GetColumn(p => p.Surname)
+            sps.Column(p => p.Surname)
                 .SetName("Actor's surname")
                 .SetHorizontalAlignment(HorizontalAlignment.Right);
 
-            sps.GetColumn(p => p.BirthDate)
+            sps.Column(p => p.BirthDate)
                 .SetStyle(s => s.DateTimeFormat = "dd/mm/yyyy");
 
-            sps.GetCells(p => p.BirthDate)
+            sps.Cells(p => p.BirthDate)
                 .SetFillForegroundColor(birthDate => birthDate.HasValue && birthDate.Value.Month == 3 ? Color.Red : Color.Yellow);
         });
 
@@ -69,18 +69,18 @@ public class Class2
 
             sps.Sheet2.HasHeader(true);
 
-            sps.GetColumn(sps.Sheet1, p => p.Name)
+            sps.Column(sps.Sheet1, p => p.Name)
                 .SetName("Actor's name")
                 .SetStyle(s => s.FillForegroundColor = Color.Aqua);
 
-            sps.GetColumn(sps.Sheet1, p => p.Surname)
+            sps.Column(sps.Sheet1, p => p.Surname)
                 .SetName("Actor's surname")
                 .SetHorizontalAlignment(HorizontalAlignment.Right);
 
-            sps.GetColumn(sps.Sheet2, p => p.CreationDate)
+            sps.Column(sps.Sheet2, p => p.CreationDate)
                 .SetDateTimeFormat("dd/mm/yyyy");
 
-            sps.GetColumn(sps.Sheet2, p => p.Amount)
+            sps.Column(sps.Sheet2, p => p.Amount)
                 .SetFillForegroundColor(Color.Green);
         });
 

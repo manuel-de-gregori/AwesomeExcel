@@ -8,6 +8,6 @@ public interface ISheetCustomizer<TSheet>
     SheetCustomization<TSheet> Sheet { get; }
     WorkbookCustomization Workbook { get; }
 
-    CellCustomization<TProperty> GetCells<TProperty>(Expression<Func<TSheet, TProperty>> selector);
-    ColumnCustomization GetColumn<TProperty>(Expression<Func<TSheet, TProperty>> selector);
+    CellCustomization<TProperty> Cells<TProperty>(Expression<Func<TSheet, TProperty>> selector);
+    ColumnCustomization Column<TProperty>(Expression<Func<TSheet, TProperty>> selector);
 }

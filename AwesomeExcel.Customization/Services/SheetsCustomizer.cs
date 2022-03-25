@@ -12,7 +12,7 @@ public abstract class SheetsCustomizer : ISheetsCustomizer
     private Dictionary<SheetCustomization, ColumnsCustomizer> dict = new();
     private Dictionary<SheetCustomization, CellsCustomizer> cells = new();
 
-    public ColumnCustomization GetColumn<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
+    public ColumnCustomization Column<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
     {
         if (!dict.ContainsKey(sheet))
         {
@@ -27,7 +27,7 @@ public abstract class SheetsCustomizer : ISheetsCustomizer
         return customizer.GetOrCreateColumn(pi);
     }
 
-    public CellCustomization<TProperty> GetCells<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
+    public CellCustomization<TProperty> Cells<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector)
     {
         return null;
     }

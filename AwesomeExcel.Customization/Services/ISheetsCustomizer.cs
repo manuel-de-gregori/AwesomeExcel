@@ -7,8 +7,8 @@ namespace AwesomeExcel.Customization.Services;
 public interface ISheetsCustomizer
 {
     WorkbookCustomization Workbook { get; }
-    ColumnCustomization GetColumn<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector);
-    CellCustomization<TProperty> GetCells<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector);
+    ColumnCustomization Column<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector);
+    CellCustomization<TProperty> Cells<TSheet, TProperty>(SheetCustomization<TSheet> sheet, Expression<Func<TSheet, TProperty>> selector);
 }
 
 public interface ISheetsCustomizer<TSheet1, TSheet2> : ISheetsCustomizer
