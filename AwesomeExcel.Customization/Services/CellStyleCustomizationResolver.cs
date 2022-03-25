@@ -140,7 +140,12 @@ public class CellStyleCustomizationResolver
     private CellFontStyleCustomization GetFontStyleCustomization(CellStyleCustomization sc)
     {
         const string pName = nameof(CellStyleCustomization<object>.FontStyle);
-        return GetValue<CellFontStyleCustomization>(sc, pName, value);
+
+        Type type = sc.GetType();
+        PropertyInfo pi = type.GetProperty(pName);
+        var pValue = (CellFontStyleCustomization)pi.GetValue(sc);
+
+        return pValue;
     }
 
     private Color? GetFontColor(CellFontStyleCustomization cfsc)
@@ -169,7 +174,7 @@ public class CellStyleCustomizationResolver
 
     private T GetFontValue<T>(CellFontStyleCustomization cfsc, string pName, object value)
     {
-        Type fscType = typeof(CellFontStyleCustomization<object>);
+        Type fscType = cfsc.GetType();
         PropertyInfo pi = fscType.GetProperty(pName);
         var pValue = (Delegate)pi.GetValue(cfsc);
         var result = Invoke<T>(pValue, value);
