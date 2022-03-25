@@ -75,7 +75,6 @@ public class SheetFactoryTest
         Assert.AreEqual(sheet.Columns[3].Name, nameof(Person.Age));
     }
 
-
     [TestMethod]
     public void Create_Columns_ShouldHave_RightType()
     {
