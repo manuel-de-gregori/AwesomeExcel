@@ -97,22 +97,36 @@ internal class RowsGenerator
             }
             else
             {
-                column = new()
-                {
-                    ColumnType = _Excel.ColumnType.String,
-                    Name = null,
-                    Style = null
-                };
+                column = GetNewEmptyCell();
             }
 
             _Excel.Cell cell = excelRow.Cells[columnIndex];
             _Excel.Style colorBandingStyle = GetColorBandingStyle(rowNumber);
-            _Excel.Style style = stylesMerger.Merge(excelSheet.Style, colorBandingStyle, column.Style, cell?.Style);
+            _Excel.Style dateTimeFormatStyle = GetDateTimeFormatStyle(column.ColumnType);
+            _Excel.Style style = stylesMerger.Merge(dateTimeFormatStyle, excelSheet.Style, colorBandingStyle, column.Style, cell?.Style);
 
             _NPOI.CellType cellType = npoiHelper.GetCellType(column.ColumnType);
             _NPOI.ICellStyle npoiStyle = styleConverter.Convert(style);
             _NPOI.ICell npoiCell = npoiFacade.CreateCell(npoiRow, columnIndex, cellType, npoiStyle);
+
             npoiHelper.SetCellValue(npoiCell, column.ColumnType, cell?.Value);
         }
+    }
+
+    private static _Excel.Column GetNewEmptyCell()
+    {
+        return new()
+        {
+            ColumnType = _Excel.ColumnType.String,
+            Name = null,
+            Style = null
+        };
+    }
+
+    private static _Excel.Style GetDateTimeFormatStyle(_Excel.ColumnType columnType)
+    {
+        return columnType == _Excel.ColumnType.DateTime
+            ? new _Excel.Style { DateTimeFormat = "yyyy/mm/dd" }
+            : null;
     }
 }
