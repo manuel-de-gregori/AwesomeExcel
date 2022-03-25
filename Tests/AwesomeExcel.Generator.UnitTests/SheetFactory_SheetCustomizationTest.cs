@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace AwesomeExcel.Generator.UnitTests;
 
 [TestClass]
-public class SheetFactory_SheetInfoTest
+public class SheetFactory_SheetCustomizationTest
 {
     private readonly List<Person> data = new()
     {
@@ -14,11 +14,11 @@ public class SheetFactory_SheetInfoTest
     };
 
     [TestMethod]
-    public void CreateSheet_SheetInfo_ShouldHaveGivenValues()
+    public void CreateSheet_ShouldHaveGivenValues()
     {
         SheetCustomization<Person> si = new()
         {
-            Name = nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues),
+            Name = nameof(CreateSheet_ShouldHaveGivenValues),
             HasHeader = true,
             IsProtected = true
         };
@@ -26,17 +26,17 @@ public class SheetFactory_SheetInfoTest
         SheetFactory factory = new();
         Sheet sheet = factory.Create(data, si, null, null);
 
-        Assert.AreEqual(sheet.Name, nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues));
+        Assert.AreEqual(sheet.Name, nameof(CreateSheet_ShouldHaveGivenValues));
         Assert.AreEqual(sheet.HasHeader, true);
         Assert.AreEqual(sheet.IsProtected, true);
     }
 
     [TestMethod]
-    public void CreateSheet_SheetInfo_ShouldHaveGivenValues_2()
+    public void CreateSheet_ShouldHaveGivenValues_2()
     {
         SheetCustomization<Person> si = new()
         {
-            Name = nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues_2),
+            Name = nameof(CreateSheet_ShouldHaveGivenValues_2),
             HasHeader = false,
             IsProtected = false
         };
@@ -45,13 +45,13 @@ public class SheetFactory_SheetInfoTest
         SheetFactory factory = new();
         Sheet sheet = factory.Create(data, si, null, null);
 
-        Assert.AreEqual(sheet.Name, nameof(CreateSheet_SheetInfo_ShouldHaveGivenValues_2));
+        Assert.AreEqual(sheet.Name, nameof(CreateSheet_ShouldHaveGivenValues_2));
         Assert.AreEqual(sheet.HasHeader, false);
         Assert.AreEqual(sheet.IsProtected, false);
     }
 
     [TestMethod]
-    public void CreateSheet_SheetInfo_StyleAndFontStyle_ShouldHaveGivenValues()
+    public void CreateSheet_StyleAndFontStyle_ShouldHaveGivenValues()
     {
         SheetCustomization<Person> si = new()
         {

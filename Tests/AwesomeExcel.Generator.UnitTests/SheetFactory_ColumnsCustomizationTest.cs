@@ -9,7 +9,7 @@ using System.Reflection;
 namespace AwesomeExcel.Generator.UnitTests;
 
 [TestClass]
-public class SheetFactory_ColumnCustomizationServiceTest
+public class SheetFactory_ColumnsCustomizationTest
 {
     private readonly List<Person> data = new()
     {
