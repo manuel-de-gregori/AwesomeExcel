@@ -57,14 +57,14 @@ public class SheetsCustomizer<TSheet1, TSheet2> : SheetsCustomizer, ISheetsCusto
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3>
+public class SheetsCustomizer<TSheet1, TSheet2, TSheet3> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
     public SheetCustomization<TSheet3> Sheet3 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4>
+public class SheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();
@@ -72,7 +72,7 @@ public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4> : Shee
     public SheetCustomization<TSheet4> Sheet4 { get; } = new();
 }
 
-public class MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5>
+public class SheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5> : SheetsCustomizer, ISheetsCustomizer<TSheet1, TSheet2, TSheet3, TSheet4, TSheet5>
 {
     public SheetCustomization<TSheet1> Sheet1 { get; } = new();
     public SheetCustomization<TSheet2> Sheet2 { get; } = new();

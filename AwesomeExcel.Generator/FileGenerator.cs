@@ -65,7 +65,7 @@ public abstract class FileGenerator<TWorkbook>
     /// <returns>The MemoryStream of the Excel file.</returns>
     public MemoryStream Generate<TSheet1, TSheet2, TSheet3>(IEnumerable<TSheet1> rowsSheet1, IEnumerable<TSheet2> rowsSheet2, IEnumerable<TSheet3> rowsSheet3, Action<ISheetsCustomizer<TSheet1, TSheet2, TSheet3>> action)
     {
-        MultipleSheetsCustomizer<TSheet1, TSheet2, TSheet3> customizer = new();
+        SheetsCustomizer<TSheet1, TSheet2, TSheet3> customizer = new();
         action(customizer);
 
         Sheet sheet1 = sheetFactory.Create(rowsSheet1, customizer.Sheet1, customizer.GetCustomizedColumns(customizer.Sheet1), customizer.GetCustomizedCells(customizer.Sheet1));
