@@ -3,8 +3,6 @@
 ```csharp
 var stream = excelGenerator.Generate(actors, (customizer) =>
 {
-    customizer.Workbook.SetFileType(FileType.Xlsx);
-
     customizer.Sheet
         .SetName("Sheet name for README example")
         .SetFillForegroundColor(Color.LightBlue)
