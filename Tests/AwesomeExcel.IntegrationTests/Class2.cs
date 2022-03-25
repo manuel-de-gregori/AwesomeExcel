@@ -98,7 +98,21 @@ public class Class2
 
         MemoryStream file = fileGenerator.Generate(people, invoices, (c) => { });
 
-        string fileName = nameof(Class2) + "-" + nameof(TestMethod2) + ".xlsx";
+        string fileName = nameof(Class2) + "-" + nameof(TestMethod3) + ".xlsx";
+        WriteFile(file, fileName);
+    }
+
+    [TestMethod]
+    public void TestMethod4()
+    {
+        List<Person> people = GetActors();
+        List<Invoice> invoices = GetInvoices();
+
+        var fileGenerator = new BridgeNpoi.NpoiFileGenerator();
+
+        MemoryStream file = fileGenerator.Generate(invoices, (c) => { });
+
+        string fileName = nameof(Class2) + "-" + nameof(TestMethod4) + ".xlsx";
         WriteFile(file, fileName);
     }
 
